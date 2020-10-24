@@ -1,5 +1,5 @@
 # node-egitimi-movie-api
-Node.js Mehmet7 Movie API
+Node.js Mehmet7 Movies API
 
 # Movies
 
