@@ -41,7 +41,8 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
-});
+  res.json({ error: { message: err.message, code: err.code } }); // burda express'in kendi hata yakalayıcısını burada kullanmak için
+  // üstteki kısmı değiştirdik normalde res.render('error') gibi bir şey vardı biz json yaptık
+});// bu üst kısımda hataların yapısını değiştirmiş olduk normalde mesaj gibiyken artık json gibi olmuş oldu
 
 module.exports = app;

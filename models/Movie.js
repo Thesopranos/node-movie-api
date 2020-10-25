@@ -15,7 +15,7 @@ const MovieSchema = new Schema ({
        max: 10,
        min: 0,
    },
-   date: {
+   createdAt: {
        type: Date,
        default: Date.now
    }
