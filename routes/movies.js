@@ -46,7 +46,7 @@ router.get('/:movie_id', (req, res,next) => {
 
 // add movie
 router.post('/', (req, res, next) => {
-  const { title, imdb_score, category, country, year} = req.body; // req nesnesinin altında body diye bir obje var
+  const { director_id, title, imdb_score, category, country, year} = req.body; // req nesnesinin altında body diye bir obje var
   // bu obje bizim göndermiş olduğumuz post body'sini burada barındırıyor
   // yukarıdaki yapı şu yazılan her bir değişkene karşılığında gelen şeyi atamış oluyor
   // yani post metod ya bu girilen veri bu yapı sayesinde ES6 sayesinde direkt atanmış oluyor
@@ -58,6 +58,7 @@ router.post('/', (req, res, next) => {
   // bu model işleme olayında yukarıda yaptığımız atamanmış değişkenleri
   // burada veritabanındaki karşılıklarıyla eşleştiriyoruz.
   const movie = new Movie({
+    director_id: director_id,
     title: title,
     imdb_score: imdb_score,
     category: category,
