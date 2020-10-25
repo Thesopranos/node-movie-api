@@ -7,8 +7,19 @@ const Movie = require('../models/Movie.js');
 // list all movies
 router.get('/', (req, res) => {
 // öğrendiğimiz gibi uyguladık
-  const promise = Movie.find({ });
-  promise.then((data) => {
+  const promise = Movie.aggregate([  // şimdi directorleri ekledim sonrasında filmleri listelerken yönetmenler de listelensin istiyorum
+    {
+      $lookup: { // aynı işlemi yapıyoruz directore movies çekerkenki join gibi
+        from: 'directors',
+        localField: 'director_id',
+        foreignField: '_id',
+        as: 'director'
+      }
+    },
+    {
+      $unwind: '$director'
+    }
+  ]);  promise.then((data) => { // bu yüzden normalde find vardı onu aggregate yaptım
     res.json(data);
   }).catch((err) => {
     res.json(err);
