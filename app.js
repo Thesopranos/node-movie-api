@@ -16,6 +16,12 @@ const app = express();
 // bu yüzden alttaki gibi yapıyoruz
 const db = require('./helper/db.js')(); // böyle yapınca modül çalıştırılıyor
 
+// Config
+const config = require('./config');
+app.set('api_secret_key', config.api_secret_key); // bu api_secret_key'i global olarak kullanabilmek için böyle bir atama yaptık
+// data sonra bunu get ile kullanıcaz çünkü başka dosyalarda
+// yukarıda yaptığımız işlem aynı altta yapılan gibi view engine jade gibi böyle düşünebiliriz.
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
