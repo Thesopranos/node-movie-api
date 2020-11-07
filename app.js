@@ -22,6 +22,9 @@ app.set('api_secret_key', config.api_secret_key); // bu api_secret_key'i global 
 // data sonra bunu get ile kullanıcaz çünkü başka dosyalarda
 // yukarıda yaptığımız işlem aynı altta yapılan gibi view engine jade gibi böyle düşünebiliriz.
 
+// Token Middleware
+const verifyToken = require('./middleware/verify-token'); // burda sayfaya dahil ettik middleware'i
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -33,6 +36,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api', verifyToken); // nerde kullanacaksak path kısmına onu yazıyoruz. Biz api altındaki her route için sağladık şu an
+// yukarıdaki ile artık verifyToken'den geçmeyen herhangi bir route olmayacak.
 app.use('/api/movies', movieRouter);
 app.use('/api/directors',directorRouter);
 
