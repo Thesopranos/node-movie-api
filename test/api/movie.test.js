@@ -7,7 +7,8 @@ const server = require('../../app');
 chai.use(chaiHttp);
 
 // token almak için
-let token; // değer vermiyoruz değerini describe içinde atayacağız
+let token, movieId; // değer vermiyoruz değerini describe içinde atayacağız
+// movie id'yi Id bazlı arama yapabilmek için değişkenlere ekledik
 
 // şimdi tüm movieleri getiren api'nin testini yazıcaz
 // bunun için token lazım bunu sağlamamız da gerekiyor.
@@ -61,8 +62,29 @@ describe('/api/movies tests', ( ) => {
                     res.body.should.have.property('country');
                     res.body.should.have.property('year');
                     res.body.should.have.property('imdb_score');
+                    movieId = res.body._id; // burda movieId'yi test edebilmek için db'ye kaydederken movieId'ye de bunun Id'sini vermeyi sağladık.
                     done(); // asıl profesyonel olan test db'si oluşturup orada test etmek
                 }) // bu şu an post ediyor direkt sürekli db'ye ekliyor ileride testten sonra silmesini de sağlayacağız
         })
-    })
+    });
+
+    describe('/GET/:director_id movie', () => {
+        it('it should GET a movie by the given id', (done) => {
+            chai.request(server)
+                .get('/api/movies/'+ movieId)
+                .set('x-access-token', token)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('title'); // yukarıdaki gibi aynı property'lere sahip olması gerekiyor
+                    res.body.should.have.property('director_id');
+                    res.body.should.have.property('category');
+                    res.body.should.have.property('country');
+                    res.body.should.have.property('year');
+                    res.body.should.have.property('imdb_score');
+                    res.body.should.have.property('_id').eql(movieId); // burda da .eql ile id property'si eşit olmalı yukarıda çektiğimiz movieId'ye
+                    done();
+                });
+        });
+    });
 });
