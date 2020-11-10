@@ -1,0 +1,47 @@
+(Unit Test)
+birim test'e Türkiye'de çok önem verilmiyor
+birim test bir işi yerine getiren bir bütünün en küçük biriminin
+doğru çalışıp çalışmadığını kontrol etmek için yazılan
+yapılardır
+
+küçük birimlerin testinde bir problem olmuyorsa
+bütünü oluşturan parçalar da kendi içinde doğru çalışacaktır
+ama bu şu demek değildir
+sadece birim test yazarak bütünün tamamen doğru çalışacak
+farklı test tipleri var
+functional test
+international test
+
+Neden kullanmalıyız ?
+iki kişi çalışıyorsunuz bir projede x kodunu yazdın
+yarın geldin o kod çalışmıyor
+arkadaşın kod üzerinde ufak değişiklik yapmış
+kod patlamış olacak tekrar yazman gerekecek
+ama sen unit test yazmış olsaydın
+arkadaşın değişiklik yaptığında kodu o testten geçemeyeceği için
+o değişikliği yapamayacaktı
+2. güzel tarafı bir kodu yazdın her şey yolunda
+sistem çatır çatır çalışıyor
+bir düzenleme yapmak istiyorsun ama bir şeyleri bozarsın diye
+çekiniyorsun düzenleme yapmaktan eğer test yazmadıysan
+eğer unit testleri yazdıysan bir değişiklik yaptığında sıkıntı oluşuyorsa
+test sonuçları bize olumsuz geleceği için bu değişiklikleri
+canlıya göndermeyeceğiz yaptığımız değişiklikleri testten geçirdikten sonra
+canlıya göndereceğimiz için canlıda herhangi bir sorun yaşamış olmayacağız.
+
+genelde önce fonksiyon yazılır daha sonra test kodları yazılır
+ama daha profesyoneli önce test kodlarını yazmak sonra
+yazacağımız fonksiyonu bu testlerden geçirmek bu profesyonel boyutu
+
+TESTİ YAZ SEN ASLA BIRAKMA BUNU, TESTSİZ İŞ YAPMA
+UNİT TEST YAZMAK SADECE SİSTEMDEKİ BUGLARI BULMAK İÇİN DEĞİL
+YAZILIMIMIZI DAHA KALİTELİ HALE GETİRMEK İÇİN DE KULLANILIYOR
+
+package.json'da script ekledik npm test için
+mocha testi bitirdikten sonra dursun istiyorsak scriptin yanına alttaki kodu ekliyoruz
+--exit
+
+mocha sadece test dizini altındaki js dosyalarında çalışır
+bu dizine klasör ekleyip ona js koyarsak çalışmaz
+her dizine girip testleri çalıştırsın istiyorsak alttaki kodu da ekliyoruz scripte
+--recursive
