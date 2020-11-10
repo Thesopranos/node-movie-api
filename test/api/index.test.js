@@ -14,7 +14,7 @@ describe('Node Server', () => { // burda testlerimizin ne testeleri olacağını
     // bu it 1. parametre olarak olacak işi yazdık açıklama gibisinden
     // 2. parametre olarak bir callback fonksiyon ondada parametre olarak done yazdık
     //
-    it('(GET /) anasayfayı döndürür', (done) => {
+    it('(GET /) returns the homepage', (done) => {
         chai.request(server) // şimdi sorgu yapıcaz http call yapıcaz bunun için chai.request içine de nereye yapacaksak orayı yazıyoruz
                              //  biz servere yapacağımız için server yazdık yukarıda tanımlamıştık zaten
             .get('/') // get isteği yapacağımız için .get yazdık içine de nereye yapacaksak bu isteği onu yazıyoruz bu direkt kök dizin için oldu
