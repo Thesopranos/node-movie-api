@@ -48,7 +48,8 @@ describe('/api/movies tests', ( ) => {
                 country: 'Turkey',
                 year: 1950,
                 imdb_score: 8
-            }
+            };
+
             chai.request(server)
                 .post('/api/movies')
                 .send(movie)
@@ -87,4 +88,35 @@ describe('/api/movies tests', ( ) => {
                 });
         });
     });
+
+    describe('/PUT movie', () => {
+        it('it should UPDATE a movie given by id', (done) => {
+            const movie = { // burda bir örnek obje oluşturduk film post edebilmek için
+                title: 'creative',
+                director_id: '5f957dcd00078c0e1c14f634',
+                category: 'Horror',
+                country: 'France',
+                year: 1970,
+                imdb_score: 9
+            };
+
+            chai.request(server)
+                .put('/api/movies/'+ movieId)
+                .send(movie)
+                .set('x-access-token', token) // burda tokeni verdik
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object'); // yukarıda yaptıklarımızın aynısını put için yaptık
+                    res.body.should.have.property('title').eql(movie.title);  // ekstra olarak yukarıda oluşturulan filmi
+                    res.body.should.have.property('director_id').eql(movie.director_id);  // burda id'si verilmiş film ile update etmek.
+                    res.body.should.have.property('category').eql(movie.category); // eql ile hepsini kontrol ediyoruz
+                    res.body.should.have.property('country').eql(movie.country);
+                    res.body.should.have.property('year').eql(movie.year);
+                    res.body.should.have.property('imdb_score').eql(movie.imdb_score);
+                    done();
+                });
+        })
+    });
+
+
 });
