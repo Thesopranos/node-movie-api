@@ -118,5 +118,19 @@ describe('/api/movies tests', ( ) => {
         })
     });
 
+    describe('/DELETE movie', () => {
+        it('it should DELETE a movie given by id', (done) => {
+            chai.request(server)
+                .delete('/api/movies/'+ movieId) // bir öncekini aldık modifiye ettik put yerine delete koyduk
+                .set('x-access-token', token) // burda tokeni verdik
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object'); // obje olacak status: Movie is deleted. mesajı için yapıyoruz o yüzden
+                    res.body.should.have.property('movie').eql('Movie is deleted.');
+                    done();
+                });
+        })
+    });
+
 
 });
